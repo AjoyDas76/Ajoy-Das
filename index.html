@@ -36,14 +36,19 @@
   ]
 }
 </script>
+<script>
+/* apply the saved choice before the page is drawn */
+try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}
+</script>
 <style>
 :root{
   --paper:#F2F6F5; --card:#FFFFFF; --ink:#102429; --muted:#47595F; --line:#CCDADB;
   --teal:#0B6E78; --lake:#0A343F; --on-lake:#EEF7F7; --on-lake-muted:#A9C8CC; --wire:#F0B429; --medal:#96600A;
 }
 @media (prefers-color-scheme: dark){
-  :root{ --paper:#0C171B; --card:#13242A; --ink:#E7F0F1; --muted:#9FB4BA; --line:#24404A; --teal:#58C9D3; --lake:#0F3E4A; --medal:#F0B429; }
+  :root:not([data-theme="light"]){ color-scheme:dark; --paper:#0C171B; --card:#13242A; --ink:#E7F0F1; --muted:#9FB4BA; --line:#24404A; --teal:#58C9D3; --lake:#0F3E4A; --medal:#F0B429; }
 }
+:root[data-theme="dark"]{ color-scheme:dark; --paper:#0C171B; --card:#13242A; --ink:#E7F0F1; --muted:#9FB4BA; --line:#24404A; --teal:#58C9D3; --lake:#0F3E4A; --medal:#F0B429; }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.65 "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -76,9 +81,17 @@ h1{font-size:clamp(3.2rem,10vw,6rem);font-weight:800;line-height:.95;letter-spac
 @keyframes power{from{stroke-dashoffset:1}}
 
 .topbar{position:sticky;top:0;z-index:10;background:#072830;border-bottom:2px solid var(--wire)}
-.topbar .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:9px;padding-bottom:9px;scrollbar-width:none}
+.topbar .bar{display:flex;align-items:center;gap:12px;padding-top:9px;padding-bottom:9px}
+.menu{flex:1;min-width:0;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+#theme-toggle{flex:none;display:flex;align-items:center;gap:8px;padding:6px 14px;border:2px solid var(--wire);border-radius:999px;background:transparent;color:#EEF7F7;font:500 .92rem/1.4 "IBM Plex Sans",system-ui,sans-serif;cursor:pointer}
+#theme-toggle[hidden]{display:none}
+@media (hover:hover){#theme-toggle:hover{background:var(--wire);color:#17230F}}
+#theme-toggle:focus-visible{outline:3px solid #fff;outline-offset:-5px}
+#theme-toggle svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#theme-toggle .sun,#theme-toggle.is-dark .moon{display:none}
+#theme-toggle.is-dark .sun{display:block}
 .topbar a{flex:none;color:#CFE4E6;text-decoration:none;padding:6px 12px;border-radius:999px;font-size:.96rem}
-.topbar a:hover{background:var(--wire);color:#17230F}
+@media (hover:hover){.topbar a:hover{background:var(--wire);color:#17230F}}
 .topbar a:focus-visible{outline-offset:-3px}
 section,footer{scroll-margin-top:58px}
 .board{position:absolute;z-index:-1;inset:0;width:100%;height:100%;fill:none;stroke-linecap:round;stroke-linejoin:round}
@@ -121,8 +134,8 @@ h3.next{margin-top:26px}
 /* timeline drawn as one wire */
 .timeline{list-style:none;margin:0;padding:0}
 .timeline li{position:relative;padding:0 0 28px 38px}
-.timeline li::before{content:"";position:absolute;left:0;top:5px;width:16px;height:16px;border-radius:50%;border:3px solid var(--wire);background:var(--paper)}
-.timeline li:not(:last-child)::after{content:"";position:absolute;left:7px;top:21px;bottom:-5px;width:2px;background:var(--wire)}
+.timeline li::before{content:"";position:absolute;left:0;box-sizing:border-box;top:4px;width:18px;height:18px;border-radius:50%;border:3px solid var(--wire);background:var(--paper)}
+.timeline li:not(:last-child)::after{content:"";position:absolute;left:8px;top:22px;bottom:-4px;width:2px;background:var(--wire)}
 .timeline li.now::before{background:var(--wire)}
 .timeline li:last-child{padding-bottom:0}
 
@@ -145,6 +158,8 @@ footer .links{margin:0 0 30px}
 footer p{margin:0;font-size:.95rem}
 
 @media (max-width:760px){
+  #theme-toggle{padding:7px 9px}
+  #theme-toggle span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
   .awards{grid-template-columns:minmax(0,1fr)}
   .project.featured{grid-template-columns:minmax(0,1fr);padding:24px}
   .featured svg{grid-row:auto;width:72px;height:72px;margin-bottom:18px}
@@ -156,18 +171,96 @@ footer p{margin:0;font-size:.95rem}
   section{grid-template-columns:minmax(0,1fr);padding:40px 0}
   .projects{grid-template-columns:minmax(0,1fr)}
 }
+br.phone{display:none}
+section>*{min-width:0}
+/* phones: compact, with the menu and buttons each on one line */
+@media (max-width:680px){
+  body{font-size:15px;line-height:1.6}
+  br.phone{display:inline}
+  .wrap{padding-left:14px;padding-right:14px}
+
+  .topbar .wrap{padding-left:10px;padding-right:10px}
+  .topbar .bar{gap:6px;padding-top:5px;padding-bottom:5px}
+  .menu{justify-content:space-between;gap:2px}
+  .topbar a{padding:7px 1px;font-size:min(3.1vw,14px);line-height:1.5;white-space:nowrap}
+  #theme-toggle{padding:5px 6px;border-width:1.5px}
+  #theme-toggle svg{width:15px;height:15px}
+  section,footer{scroll-margin-top:48px}
+
+  .hero{justify-items:center;text-align:center;gap:14px;padding-top:22px;padding-bottom:32px}
+  .hero>div:first-child{justify-self:stretch;min-width:0}
+  .portrait{width:168px;justify-self:center}
+  .portrait .face{inset:12px}
+  .face span{font-size:2.7rem}
+  h1{font-size:2.5rem;margin-bottom:10px}
+  .role{font-size:1rem;margin-bottom:4px}
+  .role span{display:block}
+  .role .and{display:none}
+  .where{font-size:.88rem;margin-bottom:18px}
+  .links{flex-wrap:nowrap;justify-content:center;gap:6px}
+  .links a{flex:1 1 auto;max-width:130px;padding:7px 2px;border-width:1.5px;font-size:min(3.4vw,14px);text-align:center;white-space:nowrap}
+
+  section{padding:26px 0;gap:14px}
+  h2{font-size:1.3rem}
+  section>h2::after{width:40px;height:4px;margin-top:8px}
+  h3{font-size:1rem}
+  .intro{font-size:1rem}
+  .sub{font-size:.88rem}
+  h3.next{margin-top:18px}
+
+  .projects{gap:12px}
+  .project{padding:14px}
+  .project svg,.featured svg{width:44px;height:44px;padding:6px;margin-bottom:10px;border-radius:12px}
+  .project.featured{padding:16px}
+  .featured h3{font-size:1.25rem}
+
+  .timeline li{padding-left:28px;padding-bottom:18px}
+  .awards{gap:10px}
+  .awards li{padding:12px;gap:12px}
+  .awards li>div{flex:1;min-width:0}
+  .awards svg{width:38px;height:38px}
+  dl{gap:14px}
+  dd{gap:6px}
+  dd span{padding:3px 8px;font-size:.82rem}
+
+  footer{padding:28px 0 34px}
+  footer h2{margin-bottom:14px}
+  footer .links{margin-bottom:18px;justify-content:flex-start}
+}
+/* phone held sideways: name and photo side by side */
+@media (orientation:landscape) and (max-height:500px){
+  .hero{grid-template-columns:minmax(0,1fr) 200px;gap:28px;padding-top:24px;padding-bottom:32px}
+  .hero{justify-items:stretch;text-align:left}
+  .links{justify-content:flex-start;flex-wrap:nowrap;gap:8px}
+  .links a{padding:7px 14px;font-size:.9rem;white-space:nowrap}
+  .role{font-size:1.05rem}
+  .role span{display:block}
+  .role .and{display:none}
+  .portrait{width:200px;order:0;justify-self:end}
+  .portrait .face{inset:14px}
+  .face span{font-size:3.2rem}
+  h1{font-size:3.2rem;margin-bottom:12px}
+  .where{margin-bottom:18px}
+}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.ring{animation:none}.board .pulse{display:none}.project{transition:none}.project:hover{transform:none}}
 </style>
 </head>
 <body>
 <nav class="topbar" aria-label="Sections">
-  <div class="wrap">
+  <div class="wrap bar">
+  <div class="menu">
     <a href="#about">About</a>
     <a href="#projects">Projects</a>
     <a href="#experience">Experience</a>
     <a href="#education">Education</a>
     <a href="#skills">Skills</a>
     <a href="#contact">Contact</a>
+  </div>
+  <button type="button" id="theme-toggle" hidden>
+    <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5 A8.5 8.5 0 1 1 9.5 4 A7 7 0 0 0 20 14.5 Z"/></svg>
+    <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2 V4 M12 20 V22 M2 12 H4 M20 12 H22 M5 5 L6.5 6.5 M17.5 17.5 L19 19 M19 5 L17.5 6.5 M6.5 17.5 L5 19"/></svg>
+    <span></span>
+  </button>
   </div>
 </nav>
 <header>
@@ -193,7 +286,7 @@ footer p{margin:0;font-size:.95rem}
   <div class="wrap hero">
     <div>
       <h1>Ajoy Das</h1>
-      <p class="role">Trade Instructor and Electrical &amp; Electronic Engineering student</p>
+      <p class="role"><span>Trade Instructor</span> <span class="and">and</span> <span>Electrical &amp; Electronic Engineering student</span></p>
       <p class="where">Kaptai, Rangamati, Bangladesh</p>
       <div class="links">
         <a class="primary" href="mailto:Ajoydas130@gmail.com">Email me</a>
@@ -297,8 +390,8 @@ footer p{margin:0;font-size:.95rem}
   <section id="experience">
     <h2>Work experience</h2>
     <div>
-      <h3>Trade Instructor, Probartak School and College</h3>
-      <p class="sub">August 2023 to present</p>
+      <h3>Trade Instructor</h3>
+      <p class="sub">Probartak School and College<br>August 2023 to present</p>
     </div>
   </section>
 
@@ -315,7 +408,7 @@ footer p{margin:0;font-size:.95rem}
       </li>
       <li>
         <h3>Secondary School Certificate, Science</h3>
-        <p class="sub">Bangladesh Navy School and College, Kaptai (Chattogram Board)<br>2016, result 4.78 out of 5.00</p>
+        <p class="sub">Bangladesh Navy School and College, Kaptai <br class="phone">(Chattogram Board)<br>2016, result 4.78 out of 5.00</p>
       </li>
     </ol>
   </section>
@@ -324,9 +417,9 @@ footer p{margin:0;font-size:.95rem}
     <h2>Training</h2>
     <div>
       <h3>Basic PLC and Microcontroller</h3>
-      <p class="sub">Project Solution Engineering and Consultancy Ltd., DUET, Gazipur<br>3 months</p>
+      <p class="sub">Project Solution Engineering and Consultancy Ltd., <br class="phone">DUET, Gazipur<br>3 months</p>
       <h3 class="next">Microsoft Office Package and Software-Hardware Troubleshooting</h3>
-      <p class="sub">Local Government Support Project (LGSP-2)<br>1 month</p>
+      <p class="sub">Local Government Support Project <span style="white-space:nowrap">(LGSP-2)</span><br>1 month</p>
     </div>
   </section>
 
@@ -362,5 +455,46 @@ footer p{margin:0;font-size:.95rem}
     <p>© Ajoy Das</p>
   </div>
 </footer>
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('theme-toggle');
+  var system=window.matchMedia('(prefers-color-scheme: dark)');
+  function isDark(){var t=root.getAttribute('data-theme');return t?t==='dark':system.matches}
+  function paint(){
+    var d=isDark();
+    btn.classList.toggle('is-dark',d);
+    btn.querySelector('span').textContent=d?'Light mode':'Dark mode';
+  }
+  btn.addEventListener('click',function(){
+    var next=isDark()?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('theme',next)}catch(e){}
+    paint();
+  });
+  if(system.addEventListener)system.addEventListener('change',paint);
+  btn.hidden=false;
+  paint();
+})();
+</script>
+<script>
+/* on phones, shrink a title just enough to keep it on one line */
+(function(){
+  var phone=window.matchMedia('(max-width:680px)'), smallest=11;
+  var items=document.querySelectorAll('.role span:not(.and), .where, h3, section:not(#about) div:not(.projects) > p.sub, .timeline p.sub, .awards p.sub');
+  function fit(){
+    items.forEach(function(el){
+      el.style.fontSize='';el.style.whiteSpace='';
+      if(!phone.matches||el.closest('.project')&&el.tagName!=='H3')return;
+      el.style.whiteSpace='nowrap';
+      var size=parseFloat(getComputedStyle(el).fontSize);
+      while(el.scrollWidth>el.clientWidth&&size>smallest){size-=.25;el.style.fontSize=size+'px'}
+      if(el.scrollWidth>el.clientWidth){el.style.fontSize='';el.style.whiteSpace=''}
+    });
+  }
+  fit();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
+  window.addEventListener('resize',fit);
+})();
+</script>
 </body>
 </html>
