@@ -29,6 +29,12 @@ Project Solution Engineering and Consultancy Ltd., DUET, Gazipur
 
 ## Projects
 
+- **SafeGuard:** a multisensor wearable IoT system for real-time industrial safety monitoring
+- **Alcohol Detector** with car engine locking system
+- **Water Level Detector** with automatic pump controller
+- **Visitor or Person Based Room Load Management**
+- **Automatic Solar Tracking System**
+- **Density Based Traffic Light Controller**
 - **Home Automation projects**
 - **Automatic Disinfection Tunnel** built for a mosque
 
