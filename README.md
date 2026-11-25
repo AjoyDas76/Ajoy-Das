@@ -32,7 +32,7 @@ Local Government Support Project (LGSP-2)
 
 ## Projects
 
-- **SafeGuard:** a multisensor wearable IoT system for real-time industrial safety monitoring
+- **SafeGuard:** a multisensor wearable IoT system for real-time industrial safety monitoring ([view on GitHub](https://github.com/AjoyDas76/Safe_Guard))
 - **Alcohol Detector** with car engine locking system
 - **Water Level Detector** with automatic pump controller
 - **Visitor or Person Based Room Load Management**
