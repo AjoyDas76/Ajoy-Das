@@ -50,6 +50,7 @@ Local Government Support Project (LGSP-2)
 
 - **Electrical & electronics:** PLC basics, microcontrollers, home automation, circuit building
 - **Software:** Microsoft Windows, Microsoft Office, Google Docs, Google Drive
+- **Programming languages:** C++, Python, HTML
 - **Languages:** Bangla, English
 
 ## Interests
