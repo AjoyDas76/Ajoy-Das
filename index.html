@@ -39,10 +39,10 @@
 <style>
 :root{
   --paper:#F2F6F5; --card:#FFFFFF; --ink:#102429; --muted:#47595F; --line:#CCDADB;
-  --teal:#0B6E78; --lake:#0A343F; --on-lake:#EEF7F7; --on-lake-muted:#A9C8CC; --wire:#F0B429;
+  --teal:#0B6E78; --lake:#0A343F; --on-lake:#EEF7F7; --on-lake-muted:#A9C8CC; --wire:#F0B429; --medal:#96600A;
 }
 @media (prefers-color-scheme: dark){
-  :root{ --paper:#0C171B; --card:#13242A; --ink:#E7F0F1; --muted:#9FB4BA; --line:#24404A; --teal:#58C9D3; --lake:#0F3E4A; }
+  :root{ --paper:#0C171B; --card:#13242A; --ink:#E7F0F1; --muted:#9FB4BA; --line:#24404A; --teal:#58C9D3; --lake:#0F3E4A; --medal:#F0B429; }
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -53,11 +53,8 @@ h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;text-wrap:balanc
 .wrap{max-width:960px;margin:0 auto;padding:0 22px}
 
 /* top */
-header{background:var(--lake);color:var(--on-lake);overflow:hidden}
-nav{display:flex;flex-wrap:wrap;gap:4px 24px;padding-top:18px;padding-bottom:4px}
-nav a{color:var(--on-lake-muted);text-decoration:none;padding:6px 0;font-size:.98rem}
-nav a:hover{color:var(--on-lake);text-decoration:underline;text-decoration-color:var(--wire);text-decoration-thickness:2px;text-underline-offset:6px}
-.hero{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:48px;align-items:center;padding-top:52px;padding-bottom:72px}
+header{position:relative;isolation:isolate;background:radial-gradient(90% 120% at 85% 40%,#12788A 0%,transparent 60%),var(--lake);color:var(--on-lake);overflow:hidden}
+.hero{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:48px;align-items:center;padding-top:64px;padding-bottom:80px}
 h1{font-size:clamp(3.2rem,10vw,6rem);font-weight:800;line-height:.95;letter-spacing:-.025em;margin:0 0 22px}
 .role{font-size:1.28rem;font-weight:500;line-height:1.45;margin:0 0 8px;max-width:26em}
 .where{color:var(--on-lake-muted);margin:0 0 30px}
@@ -68,7 +65,7 @@ h1{font-size:clamp(3.2rem,10vw,6rem);font-weight:800;line-height:.95;letter-spac
 .links a.primary:hover{background:#FFC93F}
 
 /* photo, wired like a lamp in a circuit */
-.portrait{position:relative;width:320px;aspect-ratio:1;justify-self:end}
+.portrait{position:relative;width:340px;aspect-ratio:1;justify-self:end}
 .portrait .face{position:absolute;inset:22px;border-radius:50%;overflow:hidden;background:#16505C;display:grid;place-items:center}
 .face span{font:800 5rem/1 "Bricolage Grotesque",system-ui,sans-serif;color:var(--wire)}
 .face img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
@@ -78,10 +75,24 @@ h1{font-size:clamp(3.2rem,10vw,6rem);font-weight:800;line-height:.95;letter-spac
 .node{fill:var(--lake);stroke-width:4}
 @keyframes power{from{stroke-dashoffset:1}}
 
+.topbar{position:sticky;top:0;z-index:10;background:#072830;border-bottom:2px solid var(--wire)}
+.topbar .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:9px;padding-bottom:9px;scrollbar-width:none}
+.topbar a{flex:none;color:#CFE4E6;text-decoration:none;padding:6px 12px;border-radius:999px;font-size:.96rem}
+.topbar a:hover{background:var(--wire);color:#17230F}
+.topbar a:focus-visible{outline-offset:-3px}
+section,footer{scroll-margin-top:58px}
+.board{position:absolute;z-index:-1;inset:0;width:100%;height:100%;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.board .track{stroke:rgba(169,200,204,.2);stroke-width:2}
+.board circle{fill:var(--wire);opacity:.55}
+.board .pulse{stroke:var(--wire);stroke-width:3;stroke-dasharray:7 200;stroke-dashoffset:8;animation:flow 6s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-192}}
+.portrait svg{filter:drop-shadow(0 0 10px rgba(240,180,41,.65))}
+
 /* sections */
 section{display:grid;grid-template-columns:210px minmax(0,1fr);gap:16px 40px;padding:52px 0;border-bottom:1px solid var(--line)}
 section:last-child{border-bottom:0}
 h2{font-size:1.7rem;font-weight:600;line-height:1.2;margin:0}
+section>h2::after{content:"";display:block;width:56px;height:5px;margin-top:12px;border-radius:3px;background:linear-gradient(90deg,var(--wire),var(--teal))}
 h3{font-size:1.15rem;font-weight:600;line-height:1.35;margin:0 0 4px}
 section p{margin:0;max-width:64ch}
 .sub{color:var(--muted)}
@@ -89,10 +100,22 @@ h3.next{margin-top:26px}
 .intro{font-size:1.22rem;line-height:1.6}
 
 .projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-.project{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
-.project svg{display:block;width:56px;height:56px;margin:0 0 18px;fill:none;stroke:var(--teal);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-.project svg .spark{stroke:var(--wire);stroke-width:3.5}
-.project.featured{border-color:var(--wire);border-width:2px}
+.project{--c:#0B7A75;background:var(--card);border:1px solid var(--line);border-top:5px solid var(--c);border-radius:16px;padding:24px;box-shadow:0 10px 24px -18px var(--c);transition:transform .2s,box-shadow .2s}
+.project:hover{transform:translateY(-4px);box-shadow:0 18px 30px -16px var(--c)}
+.project svg{display:block;width:64px;height:64px;padding:8px;margin:0 0 18px;border-radius:16px;background:var(--c);fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.project svg .spark{stroke:#FFD866;stroke-width:3.5}
+.project:nth-child(3){--c:#2563B8}
+.project:nth-child(4){--c:#B83B3B}
+.project:nth-child(5){--c:#1D6FA5}
+.project:nth-child(6){--c:#6B46C1}
+.project:nth-child(7){--c:#B45309}
+.project:nth-child(8){--c:#2F7D4A}
+.project.featured{--c:#F0B429;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:24px;align-content:center;align-items:center;background:linear-gradient(120deg,#0A343F,#116673);border:0;padding:32px;color:#EEF7F7}
+.featured svg{grid-row:span 2;width:92px;height:92px;margin:0;padding:12px}
+.project.featured svg{stroke:#0A343F}
+.project.featured svg .spark{stroke:#fff}
+.featured h3{font-size:1.7rem}
+.project.featured .sub{color:#D3E8EA}
 .project.featured,.project:nth-child(even):last-child{grid-column:1/-1}
 
 /* timeline drawn as one wire */
@@ -103,13 +126,17 @@ h3.next{margin-top:26px}
 .timeline li.now::before{background:var(--wire)}
 .timeline li:last-child{padding-bottom:0}
 
-.awards{list-style:none;margin:0;padding:0;display:grid;gap:14px}
-.awards li{border-left:4px solid var(--wire);padding:2px 0 2px 18px}
+.awards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.awards li{display:flex;gap:16px;align-items:center;margin:0;background:linear-gradient(135deg,rgba(240,180,41,.24),rgba(240,180,41,.07));border:1px solid rgba(240,180,41,.6);border-radius:16px;padding:20px}
+.awards svg{flex:none;width:52px;height:52px;fill:none;stroke:var(--medal);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
 
 dl{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;margin:0}
 dt{font-weight:500}
 dd{margin:6px 0 0;display:flex;flex-wrap:wrap;gap:8px}
-dd span{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:4px 12px;font-size:.95rem}
+dd span{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:8px;padding:5px 12px;font-size:.95rem}
+dl>div:nth-child(2) span{border-left-color:#2563B8}
+dl>div:nth-child(3) span{border-left-color:#8B5CF6}
+dl>div:nth-child(4) span{border-left-color:#2F9D5A}
 
 footer{background:var(--lake);color:var(--on-lake-muted);padding:44px 0 52px}
 footer h2{color:var(--on-lake);margin:0 0 18px}
@@ -117,6 +144,10 @@ footer .links{margin:0 0 30px}
 footer p{margin:0;font-size:.95rem}
 
 @media (max-width:760px){
+  .awards{grid-template-columns:minmax(0,1fr)}
+  .project.featured{grid-template-columns:minmax(0,1fr);padding:24px}
+  .featured svg{grid-row:auto;width:72px;height:72px;margin-bottom:18px}
+  .board{opacity:.55}
   .hero{grid-template-columns:minmax(0,1fr);gap:28px;padding-top:28px;padding-bottom:52px}
   .portrait{width:230px;order:-1;justify-self:start;margin-left:0}
   .portrait .face{inset:16px}
@@ -124,19 +155,40 @@ footer p{margin:0;font-size:.95rem}
   section{grid-template-columns:minmax(0,1fr);padding:40px 0}
   .projects{grid-template-columns:minmax(0,1fr)}
 }
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.ring{animation:none}}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.ring{animation:none}.board .pulse{display:none}.project{transition:none}.project:hover{transform:none}}
 </style>
 </head>
 <body>
-<header>
-  <nav class="wrap" aria-label="Sections">
+<nav class="topbar" aria-label="Sections">
+  <div class="wrap">
     <a href="#about">About</a>
     <a href="#projects">Projects</a>
     <a href="#experience">Experience</a>
     <a href="#education">Education</a>
     <a href="#skills">Skills</a>
     <a href="#contact">Contact</a>
-  </nav>
+  </div>
+</nav>
+<header>
+  <svg class="board" viewBox="0 0 960 440" preserveAspectRatio="xMaxYMid slice" aria-hidden="true">
+    <path class="track" d="M960 60 H820 L780 100 H690 L650 140"/>
+    <path class="track" d="M960 150 H880 L840 190 V300 L800 340 H640"/>
+    <path class="track" d="M960 330 H905 L860 375 V440"/>
+    <path class="track" d="M700 0 V40 L660 80 H560 L530 50 V0"/>
+    <path class="track" d="M520 440 V400 L560 360 H690 L730 400 V440"/>
+    <path class="track" d="M430 440 L470 400 V372"/>
+    <path class="pulse" style="animation-delay:-0.0s" pathLength="100" d="M960 60 H820 L780 100 H690 L650 140"/>
+    <path class="pulse" style="animation-delay:-1.3s" pathLength="100" d="M960 150 H880 L840 190 V300 L800 340 H640"/>
+    <path class="pulse" style="animation-delay:-2.6s" pathLength="100" d="M960 330 H905 L860 375 V440"/>
+    <path class="pulse" style="animation-delay:-3.9s" pathLength="100" d="M700 0 V40 L660 80 H560 L530 50 V0"/>
+    <path class="pulse" style="animation-delay:-5.2s" pathLength="100" d="M520 440 V400 L560 360 H690 L730 400 V440"/>
+    <circle cx="650" cy="140" r="5"/>
+    <circle cx="640" cy="340" r="5"/>
+    <circle cx="860" cy="440" r="5"/>
+    <circle cx="470" cy="372" r="5"/>
+    <circle cx="780" cy="100" r="5"/>
+    <circle cx="560" cy="360" r="5"/>
+  </svg>
   <div class="wrap hero">
     <div>
       <h1>Ajoy Das</h1>
@@ -280,8 +332,8 @@ footer p{margin:0;font-size:.95rem}
   <section id="achievements">
     <h2>Achievements</h2>
     <ul class="awards">
-      <li><h3>District-level champion</h3><p class="sub">Skill Competition, 2019</p></li>
-      <li><h3>4th position</h3><p class="sub">Biggan Mela, Chattogram division</p></li>
+      <li><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M15 4 L22 18 M33 4 L26 18"/><circle cx="24" cy="31" r="13"/><path d="M24 24 L26.2 28.6 L31 29.2 L27.5 32.6 L28.4 37.4 L24 35 L19.6 37.4 L20.5 32.6 L17 29.2 L21.8 28.6 Z"/></svg><div><h3>District-level champion</h3><p class="sub">Skill Competition, 2019</p></div></li>
+      <li><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M15 4 L22 18 M33 4 L26 18"/><circle cx="24" cy="31" r="13"/><path d="M24 24 L26.2 28.6 L31 29.2 L27.5 32.6 L28.4 37.4 L24 35 L19.6 37.4 L20.5 32.6 L17 29.2 L21.8 28.6 Z"/></svg><div><h3>4th position</h3><p class="sub">Biggan Mela, Chattogram division</p></div></li>
     </ul>
   </section>
 
