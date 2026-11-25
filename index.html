@@ -124,10 +124,14 @@ h3.next{margin-top:26px}
 .project:nth-child(7){--c:#B45309}
 .project:nth-child(8){--c:#2F7D4A}
 .project.featured{--c:#F0B429;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:24px;align-content:center;align-items:center;background:linear-gradient(120deg,#0A343F,#116673);border:0;padding:32px;color:#EEF7F7}
-.featured svg{grid-row:span 2;width:92px;height:92px;margin:0;padding:12px}
+.featured svg{grid-row:span 4;width:92px;height:92px;margin:0;padding:12px}
 .project.featured svg{stroke:#0A343F}
 .project.featured svg .spark{stroke:#fff}
 .featured h3{font-size:1.7rem}
+.featured .detail{margin-top:10px}
+.featured .code{justify-self:start;margin-top:16px;padding:8px 18px;border-radius:999px;background:var(--wire);color:#17230F;font-weight:500;font-size:.95rem;text-decoration:none}
+.featured .code:hover{background:#FFC93F}
+.featured .code:focus-visible{outline-color:#fff}
 .project.featured .sub{color:#D3E8EA}
 .project.featured,.project:nth-child(even):last-child{grid-column:1/-1}
 
@@ -327,6 +331,8 @@ section>*{min-width:0}
         </svg>
         <h3>SafeGuard</h3>
         <p class="sub">A multisensor wearable IoT system for real-time industrial safety monitoring.</p>
+        <p class="sub detail">ESP32 and LoRa based smart safety vest and helmet with fall detection, GPS tracking, environmental monitoring, SOS alerts and Firebase dashboards.</p>
+        <a class="code" href="https://github.com/AjoyDas76/Safe_Guard">View SafeGuard on GitHub</a>
       </article>
       <article class="project">
         <svg viewBox="0 0 56 56" aria-hidden="true">
