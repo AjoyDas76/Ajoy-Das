@@ -6,6 +6,7 @@ Kaptai, Rangamati, Bangladesh
 I teach at Probartak School and College and build electronics projects, from home automation to an automatic disinfection tunnel. I am studying B.Sc. in Electrical & Electronic Engineering at Port City International University.
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Ajoy%20Das-0A66C2?logo=linkedin&logoColor=white)](https://linkedin.com/in/ajoy-das-bspi)
+[![Facebook](https://img.shields.io/badge/Facebook-ajoy.kaptai-1877F2?logo=facebook&logoColor=white)](https://www.facebook.com/ajoy.kaptai)
 [![Email](https://img.shields.io/badge/Email-Ajoydas130%40gmail.com-D14836?logo=gmail&logoColor=white)](mailto:Ajoydas130@gmail.com)
 
 ## Work experience
@@ -49,4 +50,5 @@ Gardening, making electronics projects
 ## Contact
 
 - LinkedIn: [linkedin.com/in/ajoy-das-bspi](https://linkedin.com/in/ajoy-das-bspi)
+- Facebook: [facebook.com/ajoy.kaptai](https://www.facebook.com/ajoy.kaptai)
 - Email: [Ajoydas130@gmail.com](mailto:Ajoydas130@gmail.com)
