@@ -31,56 +31,133 @@
   "knowsLanguage": ["Bangla", "English"],
   "sameAs": [
     "https://github.com/AjoyDas76",
-    "https://linkedin.com/in/ajoy-das-bspi"
+    "https://linkedin.com/in/ajoy-das-bspi",
+    "https://www.facebook.com/ajoy.kaptai"
   ]
 }
 </script>
 <style>
 :root{
-  --paper:#EDF1F2; --ink:#12222A; --muted:#4A5C64; --line:#C5D0D4;
-  --teal:#0B6E78; --wire:#E3A500; --card:#F9FBFB;
+  --paper:#F2F6F5; --card:#FFFFFF; --ink:#102429; --muted:#47595F; --line:#CCDADB;
+  --teal:#0B6E78; --lake:#0A343F; --on-lake:#EEF7F7; --on-lake-muted:#A9C8CC; --wire:#F0B429;
 }
 @media (prefers-color-scheme: dark){
-  :root{ --paper:#0F1A1F; --ink:#E6EEF0; --muted:#9DB0B7; --line:#243842; --teal:#4FC3CF; --wire:#F2B91F; --card:#15252C; }
+  :root{ --paper:#0C171B; --card:#13242A; --ink:#E7F0F1; --muted:#9FB4BA; --line:#24404A; --teal:#58C9D3; --lake:#0F3E4A; }
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.65 "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
 a{color:var(--teal)}
 a:focus-visible{outline:3px solid var(--wire);outline-offset:3px}
-.wrap{max-width:860px;margin:0 auto;padding:0 22px}
-header{padding:72px 0 48px;border-bottom:1px solid var(--line)}
-h1{font:800 clamp(2.8rem,9vw,5.2rem)/1 "Bricolage Grotesque",system-ui,sans-serif;margin:0 0 14px;letter-spacing:-.02em}
-.role{font-size:1.2rem;margin:0 0 6px;font-weight:500}
-.where{color:var(--muted);margin:0 0 26px}
-.trace{height:6px;width:140px;background:var(--wire);border-radius:3px;margin:0 0 26px;position:relative}
-.trace::after{content:"";position:absolute;right:-14px;top:-4px;width:14px;height:14px;border-radius:50%;border:3px solid var(--wire);background:var(--paper)}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;text-wrap:balance}
+.wrap{max-width:960px;margin:0 auto;padding:0 22px}
+
+/* top */
+header{background:var(--lake);color:var(--on-lake);overflow:hidden}
+nav{display:flex;flex-wrap:wrap;gap:4px 24px;padding-top:18px;padding-bottom:4px}
+nav a{color:var(--on-lake-muted);text-decoration:none;padding:6px 0;font-size:.98rem}
+nav a:hover{color:var(--on-lake);text-decoration:underline;text-decoration-color:var(--wire);text-decoration-thickness:2px;text-underline-offset:6px}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:48px;align-items:center;padding-top:52px;padding-bottom:72px}
+h1{font-size:clamp(3.2rem,10vw,6rem);font-weight:800;line-height:.95;letter-spacing:-.025em;margin:0 0 22px}
+.role{font-size:1.28rem;font-weight:500;line-height:1.45;margin:0 0 8px;max-width:26em}
+.where{color:var(--on-lake-muted);margin:0 0 30px}
 .links{display:flex;flex-wrap:wrap;gap:12px}
-.links a{display:inline-block;padding:10px 18px;border:2px solid var(--teal);border-radius:6px;text-decoration:none;font-weight:500}
-.links a:hover{background:var(--teal);color:var(--paper)}
-section{padding:44px 0;border-bottom:1px solid var(--line)}
-h2{font:600 1.7rem/1.2 "Bricolage Grotesque",system-ui,sans-serif;margin:0 0 20px}
-.item{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--teal);padding:16px 20px;margin:0 0 14px;border-radius:4px}
-.item h3{margin:0 0 2px;font-size:1.08rem;font-weight:500}
-.item p{margin:0;color:var(--muted)}
-.item .when{font-size:.95rem}
-ul{padding-left:20px;margin:0}
-li{margin:0 0 6px}
-footer{padding:32px 0 56px;color:var(--muted);font-size:.95rem}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+.links a{display:inline-block;padding:10px 20px;border:2px solid rgba(238,247,247,.4);border-radius:999px;color:var(--on-lake);text-decoration:none;font-weight:500}
+.links a:hover{border-color:var(--wire)}
+.links a.primary{background:var(--wire);border-color:var(--wire);color:#17230F}
+.links a.primary:hover{background:#FFC93F}
+
+/* photo, wired like a lamp in a circuit */
+.portrait{position:relative;width:320px;aspect-ratio:1;justify-self:end}
+.portrait .face{position:absolute;inset:22px;border-radius:50%;overflow:hidden;background:#16505C;display:grid;place-items:center}
+.face span{font:800 5rem/1 "Bricolage Grotesque",system-ui,sans-serif;color:var(--wire)}
+.face img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
+.portrait svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;fill:none;stroke:var(--wire);stroke-linecap:round;stroke-linejoin:round}
+.ring{stroke-width:4;stroke-dasharray:1;stroke-dashoffset:0;animation:power 1.4s ease-out .2s backwards}
+.lead{stroke-width:4}
+.node{fill:var(--lake);stroke-width:4}
+@keyframes power{from{stroke-dashoffset:1}}
+
+/* sections */
+section{display:grid;grid-template-columns:210px minmax(0,1fr);gap:16px 40px;padding:52px 0;border-bottom:1px solid var(--line)}
+section:last-child{border-bottom:0}
+h2{font-size:1.7rem;font-weight:600;line-height:1.2;margin:0}
+h3{font-size:1.15rem;font-weight:600;line-height:1.35;margin:0 0 4px}
+section p{margin:0;max-width:64ch}
+.sub{color:var(--muted)}
+.intro{font-size:1.22rem;line-height:1.6}
+
+.projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.project{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
+.project svg{display:block;width:56px;height:56px;margin:0 0 18px;fill:none;stroke:var(--teal);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.project svg .spark{stroke:var(--wire);stroke-width:3.5}
+
+/* timeline drawn as one wire */
+.timeline{list-style:none;margin:0;padding:0}
+.timeline li{position:relative;padding:0 0 28px 38px}
+.timeline li::before{content:"";position:absolute;left:0;top:5px;width:16px;height:16px;border-radius:50%;border:3px solid var(--wire);background:var(--paper)}
+.timeline li:not(:last-child)::after{content:"";position:absolute;left:7px;top:21px;bottom:-5px;width:2px;background:var(--wire)}
+.timeline li.now::before{background:var(--wire)}
+.timeline li:last-child{padding-bottom:0}
+
+.awards{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.awards li{border-left:4px solid var(--wire);padding:2px 0 2px 18px}
+
+dl{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;margin:0}
+dt{font-weight:500}
+dd{margin:6px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+dd span{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:4px 12px;font-size:.95rem}
+
+footer{background:var(--lake);color:var(--on-lake-muted);padding:44px 0 52px}
+footer h2{color:var(--on-lake);margin:0 0 18px}
+footer .links{margin:0 0 30px}
+footer p{margin:0;font-size:.95rem}
+
+@media (max-width:760px){
+  .hero{grid-template-columns:minmax(0,1fr);gap:28px;padding-top:28px;padding-bottom:52px}
+  .portrait{width:230px;order:-1;justify-self:start;margin-left:0}
+  .portrait .face{inset:16px}
+  .face span{font-size:3.6rem}
+  section{grid-template-columns:minmax(0,1fr);padding:40px 0}
+  .projects{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.ring{animation:none}}
 </style>
 </head>
 <body>
 <header>
-  <div class="wrap">
-    <h1>Ajoy Das</h1>
-    <p class="role">Trade Instructor · Electrical &amp; Electronic Engineering student</p>
-    <p class="where">Kaptai, Rangamati, Bangladesh</p>
-    <div class="trace" aria-hidden="true"></div>
-    <div class="links">
-      <a href="https://linkedin.com/in/ajoy-das-bspi">LinkedIn</a>
-      <a href="https://github.com/AjoyDas76">GitHub</a>
-      <a href="mailto:Ajoydas130@gmail.com">Email me</a>
+  <nav class="wrap" aria-label="Sections">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="wrap hero">
+    <div>
+      <h1>Ajoy Das</h1>
+      <p class="role">Trade Instructor and Electrical &amp; Electronic Engineering student</p>
+      <p class="where">Kaptai, Rangamati, Bangladesh</p>
+      <div class="links">
+        <a class="primary" href="mailto:Ajoydas130@gmail.com">Email me</a>
+        <a href="https://linkedin.com/in/ajoy-das-bspi">LinkedIn</a>
+        <a href="https://github.com/AjoyDas76">GitHub</a>
+        <a href="https://www.facebook.com/ajoy.kaptai">Facebook</a>
+      </div>
+    </div>
+    <div class="portrait">
+      <div class="face">
+        <span aria-hidden="true">AD</span>
+        <!-- Your photo: put a file named photo.jpg next to this index.html -->
+        <img src="photo.jpg" alt="Portrait of Ajoy Das" onerror="this.remove()">
+      </div>
+      <svg viewBox="0 0 320 320" aria-hidden="true">
+        <circle class="ring" cx="160" cy="160" r="150" pathLength="1" transform="rotate(135 160 160)"/>
+        <path class="lead" d="M54 266 L22 298"/>
+        <circle class="node" cx="16" cy="304" r="8"/>
+        <circle class="node" cx="266" cy="54" r="8"/>
+      </svg>
     </div>
   </div>
 </header>
@@ -88,74 +165,95 @@ footer{padding:32px 0 56px;color:var(--muted);font-size:.95rem}
 <main class="wrap">
   <section id="about">
     <h2>About</h2>
-    <p>I teach at Probartak School and College and build electronics projects, from home automation to an automatic disinfection tunnel. I am studying B.Sc. in Electrical &amp; Electronic Engineering at Port City International University. I learn fast, like a challenge and enjoy solving practical problems.</p>
+    <p class="intro">I teach at Probartak School and College and build electronics projects, from home automation to an automatic disinfection tunnel. I am studying B.Sc. in Electrical &amp; Electronic Engineering at Port City International University. I learn fast, like a challenge and enjoy solving practical problems.</p>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+      <article class="project">
+        <svg viewBox="0 0 56 56" aria-hidden="true">
+          <path d="M6 27 L28 8 L50 27"/><path d="M12 23 V48 H44 V23"/>
+          <path class="spark" d="M30 24 L22 36 H29 L26 44 L35 32 H28 Z"/>
+        </svg>
+        <h3>Home Automation</h3>
+        <p class="sub">Electronics projects for controlling home appliances.</p>
+      </article>
+      <article class="project">
+        <svg viewBox="0 0 56 56" aria-hidden="true">
+          <path d="M8 48 V28 a20 20 0 0 1 40 0 V48"/><path d="M4 48 H52"/>
+          <path class="spark" d="M18 25 v.1 M28 20 v.1 M38 25 v.1 M21 35 v.1 M35 35 v.1 M28 30 v.1"/>
+        </svg>
+        <h3>Automatic Disinfection Tunnel</h3>
+        <p class="sub">Built for a mosque.</p>
+      </article>
+    </div>
   </section>
 
   <section id="experience">
     <h2>Work experience</h2>
-    <div class="item">
+    <div>
       <h3>Trade Instructor, Probartak School and College</h3>
-      <p class="when">August 2023 to present</p>
+      <p class="sub">August 2023 to present</p>
     </div>
   </section>
 
   <section id="education">
     <h2>Education</h2>
-    <div class="item">
-      <h3>B.Sc. in Electrical &amp; Electronic Engineering</h3>
-      <p>Port City International University · Ongoing</p>
-    </div>
-    <div class="item">
-      <h3>Diploma in Electrical Engineering</h3>
-      <p>Bangladesh Sweden Polytechnic Institute (BTEB) · 2020 · 3.72 out of 4.00</p>
-    </div>
-    <div class="item">
-      <h3>Secondary School Certificate, Science</h3>
-      <p>Bangladesh Navy School and College, Kaptai (Chattogram Board) · 2016 · 4.78 out of 5.00</p>
-    </div>
+    <ol class="timeline">
+      <li class="now">
+        <h3>B.Sc. in Electrical &amp; Electronic Engineering</h3>
+        <p class="sub">Port City International University<br>Ongoing</p>
+      </li>
+      <li>
+        <h3>Diploma in Electrical Engineering</h3>
+        <p class="sub">Bangladesh Sweden Polytechnic Institute (BTEB)<br>2020, result 3.72 out of 4.00</p>
+      </li>
+      <li>
+        <h3>Secondary School Certificate, Science</h3>
+        <p class="sub">Bangladesh Navy School and College, Kaptai (Chattogram Board)<br>2016, result 4.78 out of 5.00</p>
+      </li>
+    </ol>
   </section>
 
   <section id="training">
     <h2>Training</h2>
-    <div class="item">
+    <div>
       <h3>Basic PLC and Microcontroller</h3>
-      <p>Project Solution Engineering and Consultancy Ltd., DUET, Gazipur · 3 months</p>
-    </div>
-  </section>
-
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="item">
-      <h3>Home Automation</h3>
-      <p>Electronics projects for controlling home appliances.</p>
-    </div>
-    <div class="item">
-      <h3>Automatic Disinfection Tunnel</h3>
-      <p>Built for a mosque.</p>
+      <p class="sub">Project Solution Engineering and Consultancy Ltd., DUET, Gazipur<br>3 months</p>
     </div>
   </section>
 
   <section id="achievements">
     <h2>Achievements</h2>
-    <ul>
-      <li>District-level champion, Skill Competition (2019)</li>
-      <li>4th position, Biggan Mela, Chattogram division</li>
+    <ul class="awards">
+      <li><h3>District-level champion</h3><p class="sub">Skill Competition, 2019</p></li>
+      <li><h3>4th position</h3><p class="sub">Biggan Mela, Chattogram division</p></li>
     </ul>
   </section>
 
   <section id="skills">
     <h2>Skills</h2>
-    <ul>
-      <li>PLC basics, microcontrollers, home automation, circuit building</li>
-      <li>Microsoft Windows, Microsoft Office, Google Docs, Google Drive</li>
-      <li>Languages: Bangla, English</li>
-      <li>Interests: gardening, making electronics projects</li>
-    </ul>
+    <dl>
+      <div><dt>Electrical and electronics</dt><dd><span>PLC basics</span><span>Microcontrollers</span><span>Home automation</span><span>Circuit building</span></dd></div>
+      <div><dt>Software</dt><dd><span>Microsoft Windows</span><span>Microsoft Office</span><span>Google Docs</span><span>Google Drive</span></dd></div>
+      <div><dt>Languages</dt><dd><span>Bangla</span><span>English</span></dd></div>
+      <div><dt>Interests</dt><dd><span>Gardening</span><span>Making electronics projects</span></dd></div>
+    </dl>
   </section>
 </main>
 
-<footer>
-  <div class="wrap">© Ajoy Das · <a href="https://linkedin.com/in/ajoy-das-bspi">LinkedIn</a> · <a href="https://github.com/AjoyDas76">GitHub</a></div>
+<footer id="contact">
+  <div class="wrap">
+    <h2>Get in touch</h2>
+    <div class="links">
+        <a class="primary" href="mailto:Ajoydas130@gmail.com">Email me</a>
+        <a href="https://linkedin.com/in/ajoy-das-bspi">LinkedIn</a>
+        <a href="https://github.com/AjoyDas76">GitHub</a>
+        <a href="https://www.facebook.com/ajoy.kaptai">Facebook</a>
+      </div>
+    <p>© Ajoy Das</p>
+  </div>
 </footer>
 </body>
 </html>
