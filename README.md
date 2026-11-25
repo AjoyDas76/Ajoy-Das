@@ -27,6 +27,9 @@ August 2023 to present
 **Basic PLC and Microcontroller** (3 months)
 Project Solution Engineering and Consultancy Ltd., DUET, Gazipur
 
+**Microsoft Office Package and Software-Hardware Troubleshooting** (1 month)
+Local Government Support Project (LGSP-2)
+
 ## Projects
 
 - **SafeGuard:** a multisensor wearable IoT system for real-time industrial safety monitoring
