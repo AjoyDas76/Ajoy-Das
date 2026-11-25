@@ -91,6 +91,8 @@ section p{margin:0;max-width:64ch}
 .project{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
 .project svg{display:block;width:56px;height:56px;margin:0 0 18px;fill:none;stroke:var(--teal);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
 .project svg .spark{stroke:var(--wire);stroke-width:3.5}
+.project.featured{border-color:var(--wire);border-width:2px}
+.project.featured,.project:nth-child(even):last-child{grid-column:1/-1}
 
 /* timeline drawn as one wire */
 .timeline{list-style:none;margin:0;padding:0}
@@ -171,6 +173,14 @@ footer p{margin:0;font-size:.95rem}
   <section id="projects">
     <h2>Projects</h2>
     <div class="projects">
+      <article class="project featured">
+        <svg viewBox="0 0 56 56" aria-hidden="true">
+          <path d="M28 6 L47 13 V27 C47 39 39 46 28 50 C17 46 9 39 9 27 V13 Z"/>
+          <path class="spark" d="M16 29 H22 L26 20 L31 37 L35 29 H40"/>
+        </svg>
+        <h3>SafeGuard</h3>
+        <p class="sub">A multisensor wearable IoT system for real-time industrial safety monitoring.</p>
+      </article>
       <article class="project">
         <svg viewBox="0 0 56 56" aria-hidden="true">
           <path d="M6 27 L28 8 L50 27"/><path d="M12 23 V48 H44 V23"/>
@@ -186,6 +196,46 @@ footer p{margin:0;font-size:.95rem}
         </svg>
         <h3>Automatic Disinfection Tunnel</h3>
         <p class="sub">Built for a mosque.</p>
+      </article>
+      <article class="project">
+        <svg viewBox="0 0 56 56" aria-hidden="true">
+          <rect x="12" y="25" width="32" height="24" rx="5"/><path d="M19 25 V18 a9 9 0 0 1 18 0 V25"/>
+          <path class="spark" d="M28 33 v7"/>
+        </svg>
+        <h3>Alcohol Detector with Car Engine Locking System</h3>
+        <p class="sub">Detects alcohol and locks the car engine.</p>
+      </article>
+      <article class="project">
+        <svg viewBox="0 0 56 56" aria-hidden="true">
+          <path d="M13 8 V44 a4 4 0 0 0 4 4 H39 a4 4 0 0 0 4 -4 V8"/><path d="M13 30 q7.5 -5 15 0 t15 0"/>
+          <path class="spark" d="M33 16 H38 M33 22 H38"/>
+        </svg>
+        <h3>Water Level Detector with Automatic Pump Controller</h3>
+        <p class="sub">Detects the water level and controls the pump automatically.</p>
+      </article>
+      <article class="project">
+        <svg viewBox="0 0 56 56" aria-hidden="true">
+          <circle cx="19" cy="17" r="7"/><path d="M7 46 V41 a12 12 0 0 1 24 0 V46"/>
+          <path class="spark" d="M42 14 a8 8 0 0 1 4 14 V32 H38 V28 a8 8 0 0 1 4 -14 M39 39 H45"/>
+        </svg>
+        <h3>Visitor or Person Based Room Load Management</h3>
+        <p class="sub">Manages the electrical load of a room based on the visitors or people in it.</p>
+      </article>
+      <article class="project">
+        <svg viewBox="0 0 56 56" aria-hidden="true">
+          <path d="M10 36 L19 20 H49 L40 36 Z M27 36 L33 20 M29 36 V49 M20 49 H38"/>
+          <path class="spark" d="M11 11 v.1 M11 3 v1 M3 11 h1 M18 11 h1 M5 5 l1 1 M17 5 l-1 1"/>
+        </svg>
+        <h3>Automatic Solar Tracking System</h3>
+        <p class="sub">Tracks the sun automatically.</p>
+      </article>
+      <article class="project">
+        <svg viewBox="0 0 56 56" aria-hidden="true">
+          <rect x="18" y="5" width="20" height="38" rx="7"/><path d="M28 43 V51 M19 51 H37"/>
+          <circle cx="28" cy="14" r="3.5"/><circle class="spark" cx="28" cy="24" r="3"/><circle cx="28" cy="34" r="3.5"/>
+        </svg>
+        <h3>Density Based Traffic Light Controller</h3>
+        <p class="sub">Controls traffic lights according to how dense the traffic is.</p>
       </article>
     </div>
   </section>
